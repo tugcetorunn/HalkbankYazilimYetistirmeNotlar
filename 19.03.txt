@@ -1,0 +1,11 @@
+CONSTRAINTS
+- Constraint çeþitleri
+	- primary key
+	- foreign key
+	- not null
+	- check
+	- default
+	- unique
+
+- DBCC - yanlýþ veri girilmesinden, hatalý sql kapanmalarýndan veya veri silinmesinden kaynaklý id lerde boþluklar olur. sýralý olmasý adýna id ler deðiþtirilemez. birincisi maliyetten dolayý (koþucu örneði - koþucular hep saða sola veya geriye bakarken geride kalýr ileriye bakmalý) tercih etmeyiz. id hep ileriye gitmeli. ikincisi iliþkili tablolarda veri kaybý yaþatmamasý için yapýlmaz.
+
