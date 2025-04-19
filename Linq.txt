@@ -1,0 +1,14 @@
+ 'IEnumerable' ile 'IQueryable' arasýndaki temel fark ->  
+ IEnumerable bellekte çalýþýr, IQueryable veritabanýnd
+
+LINQ'te GroupBy ile yapýlan bir iþlemin sonucunda IQueryable<IGrouping<T, K>>
+tipinde deðer döner. örneðin kategorilerine göre kitaplar olacaksa 
+IQueryable<IGrouping<string, Kitap>>
+
+'ToList()' metodunun dezavantajý -> bellek tüketimini arttýrabilir.
+
+LINQ'de 'Aggregate' iþlemi kümülatif iþlem yapar.
+
+'SelectMany' birden çok listeyi düzleþtirir.
+
+'ThenBy()' ikincil sýralama yapar.

@@ -1,0 +1,247 @@
+﻿Console.BackgroundColor = ConsoleColor.Blue; -> bir şey yazdırmadan renk görünmez.
+sadece text arka plan rengi ayarlıyor.
+Console.ForegroundColor = ConsoleColor.Red; -> text rengini ayarlıyor. yine yukarıdaki
+gibi text yazdırmadan görünmez.
+
+mails.Split(',', ';'); -> string bir değeri ayırmak için kullanılır. virgül veya 
+noktalı virgül ile yani ikisini de gördüğünde ayırır.
+
+res = double.TryParse(Console.ReadLine(), out deger); -> kullanıcıdan bir değer alır 
+ve bu değeri double türüne dönüştürmeye çalışır. Eğer dönüşüm başarılı olursa, deger 
+değişkenine atar ve res true olur. Başarısız olursa res false olur.
+if (!res)
+{
+    Console.WriteLine("değer uygun değil!");
+}
+
+Console.WriteLine("Devam etmek istiyorsanız 1 giriniz: ");
+return Convert.ToInt32(Console.ReadLine()) == 1; -> kullanıcıdan bir değer alır ve bu
+değeri int türüne dönüştürmeye çalışır. Eğer dönüşüm başarılı olursa, 1'e eşit olup 
+olmadığını kontrol eder. Eğer eşitse true döner, değilse false döner.
+
+local function -> yerel fonksiyon. sadece tanımlandığı blokta geçerli olan bir 
+fonksiyondur. dışarıdan erişilemez.
+
+foreach teki iterasyon değişkenine (var item) foreach içinde değer atanamaz. 
+
+Trim()	Hem baştaki hem sondaki boşlukları temizler.
+TrimStart()	Sadece baştaki (soldaki) boşlukları siler.
+TrimEnd()	Sadece sondaki (sağdaki) boşlukları siler.
+
+var turkce2Ingilizce = new Dictionary<char, char>
+{
+    { 'ı', 'i' },
+    { 'ö', 'o' },
+    { 'ü', 'u' },
+    { 'ş', 's' },
+    { 'ç', 'c' },
+    { 'ğ', 'g' }
+};
+var sb = new StringBuilder(metin.Length);
+foreach (var ch in metin)
+{
+    sb.Append(turkce2Ingilizce.TryGetValue(ch, out char yeniChar) ? yeniChar : ch);
+}
+return sb.ToString();
+StringBuilder sınıfı, string bir değeri değiştirmek için kullanılır. String sınıfı
+immutable olduğu için string bir değeri değiştirmek istediğimizde yeni bir string
+oluşturur. Bu da performans kaybına neden olur. StringBuilder ise mutable olduğu için
+string bir değeri değiştirmek için yeni bir string oluşturmaz. Bu da performans 
+kazancı sağlar.
+
+int a = 5;
+int b = a;  // b artık 5
+b = 10;
+Console.WriteLine($"a: {a}, b: {b}"); // a: 5, b: 10
+b = a yaptığında a'nın değeri b'ye kopyalanır ama ilişkili kalmazlar. 
+
+string s1 = "merhaba";
+string s2 = s1;
+s2 = "selam";
+Console.WriteLine($"s1: {s1}, s2: {s2}"); // s1: merhaba, s2: selam
+string bir referans tiptir, ancak immutable olduğu için burada da kopya gibi davranır.
+Ama aslında arka planda yeni string nesnesi oluşur.
+
+Nesne class’ı, Heap #100 adresinde tutuluyor.
+Hem n1 hem n2 bu nesneyi işaret ettiği için değişiklik yaptığında ortak nesne 
+etkilenir.
+
+class seviyesinde (bir de dll seviyesi var) değişkenler(field)  default olarak private 
+tır. varsayılan öyle olsa da private belirtmek clean code açısından iyidir. private 
+old için instance ile erişemiyoruz.
+internal class Personel
+{
+    private int id; 
+    public int Id;
+}
+
+bir metodun geri dönüş tipi void olsa ama ben bir değişkeni veya bir değeri dışarıya 
+aktarmak istesem nasıl aktarırım -> out, ref 
+
+👷‍ Compile Time (Derleme Zamanı):
+Kodun, bilgisayarın anlayabileceği hale (makine koduna) çevrildiği zamandır.
+Kod yazarsın ➜ "Derlersin" ➜ .exe ya da .dll dosyası oluşur.
+💡 Yani kod çalışmadan önce gerçekleşir.
+
+🚀 Runtime (Çalışma Zamanı):
+Derlenmiş programın çalıştığı andır.
+Kullanıcı programı açar ➜ Program kodu çalışmaya başlar ➜ İşlem devam eder
+💡 Yani program çalışırken gerçekleşir.
+
+🧑‍🍳 Compile time, yemek tarifine göre alışveriş yapman ve malzemeleri hazırlamandır.
+🔥 Runtime, tencereyi ocağa koyup yemeği pişirme aşamasıdır.
+Malzeme eksikse, derleme (compile) aşamasında fark edilir ve hata verilir.
+Ama malzeme var, ama bozuksa ya da yemeği yanlış karıştırırsan bu hata çalışma 
+zamanında (runtime) olur.
+
+Durum	                    Compile Time	                   Runtime
+Hatalar (error)  - Derleme sırasında fark edilir -Program çalışırken fark edilir
+Örnek hata       - int x = "abc"; (tür uymaz)	 -int.Parse("abc") ➜ Format hatası
+Performans etkisi- Yükleme öncesi optimize olur	 -Anlık hesap yapılır, yavaş olabilir
+Kod davranışı    - Sabittir, değişmez            -Dinamik, koşullara göre değişebilir
+
+* camelCase  -> değişken isimlerinde kullanılır.
+* PascalCase -> class isimlerinde kullanılır.
+* snake_case -> python
+* kebab-case -> mvc de tagHelpers ta kullanılır. asp-route vs.
+* Hungarian Notation -> değişkenin türünü belirtir. strName, intAge, txtAd ... 
+windows formda kullanılır.
+
+var -> verinin tipi belli olana kadar verilen bir placeholder gibi çalışır. runtimeda
+da designtimeda da tipin belirlendiği durumları var.
+dynamic ->
+
+is -> tür kontrolü yapmak için kullanılır
+
+C# dilinde 'yield return' ifadesi ne işe yarar ->  Gerçek zamanlı veri üretir
+
+Garbage Collector ne zaman çalışır ->  Bellek azaldığında
+
+'using' bloğunun amacı -> Otomatik nesne temizliği yapmak
+
+C#'ta record türü neden tercih edilir? ->  Immutable veri yapısı sunduğu için
+
+continue komutu, döngüde mevcut iteration ın kalan kısmını atlayarak doğrudan bir sonraki 
+iteration a geçilmesini sağlar.
+for (int i = 0; i < 10; i++)
+{
+    if (i % 2 == 0)
+        continue; // i çiftse atla
+
+    Console.WriteLine(i);
+}
+
+break komutu, döngüyü tamamen sonlandırır ve döngüden çıkar.
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+        break;
+
+    Console.WriteLine(i);
+}
+
+return komutu, döngüden değil bulunduğu metottan çıkışı sağlar. Yani döngüyü de, döngünün 
+dışında kalan kodları da sonlandırır ve çağıran metoda dönüş yapar.
+void Yazdir()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        if (i == 3)
+            return; // metodu tamamen sonlandır
+
+        Console.WriteLine(i);
+    }
+
+    Console.WriteLine("Bu satır çalışmaz");
+}
+// 2. örnek
+// metod
+void SiparisleriKontrolEt(List<List<int>> siparisler)
+{
+    foreach (var musteriSiparisleri in siparisler)
+    {
+        foreach (var urunId in musteriSiparisleri)
+        {
+            if (urunId == -1)
+            {
+                Console.WriteLine("Hatalı ürün ID tespit edildi. Kontrol sonlandırıldı.");
+                return;
+            }
+
+            Console.WriteLine($"Ürün kontrol ediliyor: {urunId}");
+        }
+    }
+
+    Console.WriteLine("Tüm siparişler başarıyla kontrol edildi.");
+}
+// metodun çağrıldığı kod
+SiparisleriKontrolEt(new List<List<int>>
+{
+    new List<int> { 101, 102, 103 },
+    new List<int> { 201, -1, 203 }, // hata var
+    new List<int> { 301, 302, 303 }
+});
+// çıktı
+Ürün kontrol ediliyor: 101
+Ürün kontrol ediliyor: 102
+Ürün kontrol ediliyor: 103
+Ürün kontrol ediliyor: 201
+Hatalı ürün ID tespit edildi. Kontrol sonlandırıldı.
+
+const - sabittir, değiştirilemez (muttable). tanımlandığı yerde değer atanmalıdır. sadece değer
+tanımlandığı yerde değişir.
+public const double Pi = 3.14;
+static metod gibi classAdi. denilerek ulaşılır.
+
+readonly - sadece constructor da değeri değiştirilebilir. 
+public readonly double katsayi = 12.5;
+static metod gibi classAdi. denilerek değil, nesne üzerinden ulaşılır.
+
+Collections
+
+- arrayden farklı olarak boyutu dinamik olarak değiştirilebilen veri yapılarıdır.
+- boyutu belli yapılarda aynı türdeki verileri saklamak için array kullanılır.
+- arraylerde boyutu yeniden ayarlamak için resize metodu kullanılabilir. ama maliyeti vardır.
+- arraylerde veri tipleri aynı olmalıdır. collectionlarda farklı olabilir.
+- array ler 1 den 3 e kadar boyuta sahip olabilir. collectionlar ise 1.
+- resim dosyaları (1096 * 768 * rgb||png||bw||jpeg... -> boyutu), ses dosyaları, string (char 
+array) birer array örneğidir.
+- collectionlar, arraylerden daha esnek ve daha güçlüdür. 
+- collectionlar, arraylerden daha fazla işlevsellik sağlar. (ekleme, çıkarma, arama, sıralama, 
+filtreleme, döngüleme, ...)
+- collectionlar, arraylerden daha fazla bellek kullanır. (arrayler bellekte sürekli yer kaplar. 
+collectionlar ise sadece kullanıldıklarında bellekte yer kaplar.) ??
+- stack, queue, linkedlist, sortedlist, dictionary, hashtable, list, arraylist, ... (collections)
+- ienumerable, ienumerator, iqueryable collectionların karakteristiğidir. collection örneği 
+değillerdir.
+- collectionlar, generic ve non-generic olarak ikiye ayrılır. generic olanlar, tip güvenliği 
+sağlar. non-generic olanlar, tip güvenliği sağlamaz.
+- linked list - otobüste arkada olan bir yolcunun kartının elden ele öne doğru ulaştırılması ve
+geri yollanması. kartı alan herkes sadece kimden aldığının ve kime verdiğinin bilgisini tutar.
+kart sadece gidiyorsa tek yönlü linkedlist, gidip geri dönüyorsa çift yönlü linkedlist.
+- List<T> (yani array tabanlı listeler), ortadan veri silindiğinde tüm elemanları kaydırmak 
+zorunda kalır. LinkedList<T> ise her elemanı bir düğüm (node) olarak tutar ve sadece 
+bağlantıları (referansları) değiştirir.
+- Stack<string> yigin = new Stack<string>();
+yigin.Push("ilk");
+yigin.Push("son");
+string sonEleman = yigin.Pop(); // "son"
+- Queue<int> kuyruk = new Queue<int>();
+kuyruk.Enqueue(10);
+kuyruk.Enqueue(20);
+int ilk = kuyruk.Dequeue(); // 10
+- SortedList<int, string> siraliListe = new SortedList<int, string>();
+siraliListe.Add(3, "Üç");
+siraliListe.Add(1, "Bir");
+siraliListe.Add(2, "İki");
+- LinkedList<string> bagliListe = new LinkedList<string>();
+bagliListe.AddLast("A");
+bagliListe.AddLast("B");
+bagliListe.AddFirst("Önce");
+- HashSet<int> sayilar = new HashSet<int> { 1, 2, 3 };
+sayilar.Add(3); // Eklenmez, çünkü zaten var
+
+
+Doğrudan çalıştırılabilir dosyalar -> exe, com
+Her exe dosyasında mutlaka bir main metodu(entrypoint) bulunur. dll dosyalarında entrypoint 
+bulunmaz.

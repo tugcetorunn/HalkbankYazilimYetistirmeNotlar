@@ -1,0 +1,22 @@
+JavaScript'te bir degiskenin tipini kontrol etmek icin typeof() kullanýlýr.
+
+CSS'te specificity (özgüllük) ile ilgili aþaðýdakilerden hangisi en yüksek önceliðe
+sahiptir?
+A) Inline style *******
+B) ID seçici
+C) Class seçici
+D) Etiket seçici
+E) Universal seçici
+
+HTML'de <section> etiketi belirli bir tematik bölgeyi belirtmek için kullanýlýr.
+html5 ile gelmiþtir.
+
+CSS'te 'z-index' özelliði katman sýralamasýný belirler.
+
+[HTML] Formdan gönderilen verileri almak için kullanýlan attribute name dir.
+
+JavaScript'te bir deðiþkenin veri tipi nasýl kontrol edilir -> typeof degisken
+
+JavaScript'te 'let' ile tanýmlanan deðiþkenin kapsamý nedir -> Block-level
+
+JavaScript'te event bubbling event in child’dan parent’a doðru yayýlmasý demektir.

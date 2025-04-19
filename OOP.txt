@@ -1,0 +1,95 @@
+OOP
+1-Encapsulation(Ýzole etmek, kapsüllemek)
+	kumanda örneði -> içi dýþardan korumak için yapýlan kap, dýþ katman
+	araba kaportasý örneði
+	kullanýcýnýn ihtiyacý olmayan þeyleri gizlemek, göstermemek
+	kural bir sýnýf içerisindeki deðiþkenleri doðrudan açmayýn der. (private hale 
+	getirin, sýnýrlayýn) (deðiþkenler diyor yani fieldler, property ler deðil))
+
+2-Inheritance(Miras, türetme, kalýtým)
+	özelliklerin bir sýnýftan diðer sýnýfa aktarýlmasý
+	örneðin: hayvanlar sýnýfý -> memeli hayvanlar sýnýfý -> insan sýnýfý
+	insan sýnýfý, memeli hayvanlar sýnýfýnýn özelliklerini alýr
+	insan sýnýfý, hayvanlar sýnýfýnýn özelliklerini alýr
+	hiyerarþik iliþki binary tree
+	object otomatik olarak kalýtým verir. çünkü her þey object ten türer.
+
+3-Polymorphism(Çok biçimlilik, çok þekillilik)
+	ayný isimde farklý iþlevler
+	örneðin: toplama iþlemi
+	iki sayýyý toplama, üç sayýyý toplama, stringleri birleþtirme
+	overloading: ayný isimde farklý parametrelerle metotlar oluþturmak
+	overriding: ayný isimde farklý sýnýflarda metotlar oluþturmak
+	örneðin: hayvanlar sýnýfý -> memeli hayvanlar sýnýfý -> insan sýnýfý
+	insan sýnýfýnda yürüme metodu, memeli hayvanlar sýnýfýnda yürüme metodu
+	insan sýnýfýnda yürüme metodu, hayvanlar sýnýfýnda yürüme metodu
+	özel bir durumu çözer yürü metodu çaðrýlýnca insan sýnýfýndaki (köylü, asker, 
+	okçu classlarýnda farklý çalýþan ayný yürü metodu varken) yürü metodu çalýþýr.
+	örn oyunlardaki çoklu karakterlerin hareketleri polimorphism ile yapýlýr. 
+	polimorphism olmasa her karakter için ayrý metot yazýlmalýydý.
+	polimorphism olmasý için kalýtým olmasý lazým.
+	sýnýf içindeki deðiþkenleri doðrudan açmayýn der. getter setter kullanýn.
+	ayný isimdeki farklý class memberlarýn (sadece method deðil) farklý þekilde 
+	çalýþabilmeleridir.
+
+
+4-Data Abstraction(Soyutlama)
+	verilerin saklanmasý ve iþlenmesi
+	örneðin: araba sýnýfý -> araba markasý, araba modeli, araba rengi
+	kod tekrarýný önler.
+	base içinde tutulan birden fazla veriler bir collection da tutularak hiyerarþik 
+	düzen oluþturulur. bu sayede alt class lara ulaþým saðlanýr.
+	diamondProblem - bir sýnýf bir sýnýf ve fazlasýndan kalýtým alýnýrsa oluþur. c# 
+	ta yoktur.
+	bir sýnýf en fazla bir sýnýftan miras alýr. (ayný seviyede a -> b -> c (c nin iki 
+	atasý var)) (a,b -> c olamaz)
+	property siz de olabilir. (gruplama amacýyla)
+	abstract class, bir kütüphane gibi kullanýlmak amacýyla vardýr. soyut bir kavram 
+	olduðu için kullanýlýr.
+	nesnesi alýnmaz. ama referans edilebilir. -> urun urun = new urun(); olmaz. urun 
+	urun2 = new kitap(); olur. -> ((kitap)urun2).sayfaSayisi propertylere de cast 
+	ederek ulaþýlabilir.
+
+CONSTRUCTOR (Ýnþa Edici Metod) -> class member
+
+bir sýnýf ram de oluþturulurken ilk çalýþan metoddur.
+bir class tan nesne oluþturulduðu zaman ilk tetiklenen metoddur.
+
+class ile ayný isimde olmalý. return type yazýlmaz, deðer döndürmez. yazmasak da 
+default void dir.
+
+genelde deðer atamak için kullanýlýr.
+
+parametresi olmayan ctor default constructor dýr.
+parametreli ctor yazarsak default ctor oluþturulmaz. kednimiz default ctor yazmazsak 
+compiler default ctor oluþturur.
+
+otomatik çalýþtýðý için nesneAdi. yazdýðýmýzda ctor u göremeyiz. biz çaðýrmayýz. new
+ile çaðrýlýr.
+
+new keywordünün saðýnda new lenen nesne için ctor çalýþýr. new Kitap() -> Kitap() 
+ctor dur. bunu çalýþtýrmýþ oluruz.
+
+neden ctor kullanýrýz?
+1- nesne ilk oluþturulduðunda nesnenin baþlangýç deðerlerini atamak için. (çok fazla 
+kullanýlmýyor artýk) { Id = 1, ... artýk object initializer kullanýlýyor} 
+2- sýnýf oluþturulurken ilk yapýlmasýný istediðimiz iþlemleri yapmak için. (örneðin: 
+dosyayý açmak, veritabaný baðlantýsý açmak, oyunlarda bir yer yapýlýrken o esnada 
+çýkan animasyon)
+3- kullanýcýlarý bir þeylere, belirli parametrelere zorlamak (parametre vemeye) -> 
+dependency injection (ctor inversion) (bir sýnýfýn baþka bir sýnýfý kullanabilmesi 
+için onu ctor ile almasý) (zorunlu old için default ctor (parametresiz) oluþturmayýz)
+
+imzasý farklý olmak kaydýyla n tane ctor yazarak overload edebiliriz.
+
+destructure (dector) -> class member
+yýkýcý olan metod destructor dýr. 1 tane olur. (deplicated)
+kullanýmý yoktur. (çünkü garbage collector var)
+kullanýrken dikkatli olmak gerekir (performans sorunlarýna yol açabilir)
+IDisposable -> dispose() kullanmak destructor dan daha iyidir. memoryden dolayý.
+
+*** bir sýnýfýn kendi ctor larý arasýnda veri transferi yapmak için this() kullanýlýr.
+public Kitap(...) : this(...)
+*** kalýtým ile ilgili ctorlar arasý veri transferi yapýlacak ise base() kullanýlýr.
+
+bir class ýn adýný yazdýrmak istiyorsak -> this.GetType().Name

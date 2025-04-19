@@ -1,0 +1,5 @@
+Dependency Injection (bağımlılık enjeksiyonu) avantajı ->  Test edilebilirliği artırır.
+
+async/await yapısının en önemli avantajı -> UI thread’i bloklamadan işlemlerin yapılmasını sağlar.
+
+MVC Core’da middleware sıralaması neden önemlidir -> Request pipeline sırasını belirler.

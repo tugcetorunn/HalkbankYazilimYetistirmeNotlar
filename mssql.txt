@@ -1,0 +1,39 @@
+** inner join -> joinlenen iliþkili iki tabloya ait eþleþen veriler gelir.
+-- Müþteri ve sipariþ tablosu varsa, sadece sipariþi olan müþteriler listelenir.
+
+** left (left outer) join -> sol tablodaki tüm kayýtlarý getirir, sað tabloda eþleþme 
+varsa getirir yoksa null döner.
+-- Tüm müþteriler listelenir, sipariþi olmayan müþterilerde sipariþ alanlarý NULL olur.
+
+** right (right outer) join -> sað tablodaki tüm kayýtlarý getirir. Sol tabloda eþleþme 
+varsa getirir, yoksa NULL döner.
+
+-- Tüm sipariþler listelenir, müþteri bilgisi yoksa NULL döner.
+** full (full outer) join -> Her iki tablodaki tüm kayýtlarý getirir. Eþleþme varsa
+getirir, eþleþme yoksa NULL döner.
+-- Müþterisi olmayan sipariþler veya sipariþi olmayan müþteriler de dahil olur.
+
+** cross join -> Ýki tablo arasýnda kartezyen çarpým yapar. Her satýr, diðer
+tablodaki tüm satýrlarla eþleþir. SELECT * FROM Tablo1 CROSS JOIN Tablo2;
+-- 3 müþteri, 4 ürün varsa, sonuç 3 × 4 = 12 satýr olur.
+
+** self join -> Bir tabloyu kendiyle joinlemek için kullanýlýr. Genelde hiyerarþik 
+yapýlarda kullanýlýr (örneðin çalýþan yöneticisi iliþkisi). SELECT A.Ad AS Calisan,
+B.Ad AS Yonetici FROM Calisanlar A LEFT JOIN Calisanlar B ON A.YoneticiID = B.ID;
+
+orphan records (öksüz yetim kayýt) -> inner join yazdýðýmýzda karþýsýna deðer 
+gelmiyorsa orphan olma ihtimali yüksektir ama kesin deðildir. çünkü her kayýp orphan
+diyemeyiz. yeni bir departman açýldý. ama içerisine personel atanmadý. buna orphan 
+denilmez. 5 departman var 1 den 5 e kadar id lenmiþ.
+fakat bir personelin departmaný 11. 11 id li departman yok. bu orphan dýr. bunun önüne
+foreign key kýsýtlamasý ile geçeriz.
+
+veritabaný programcýlýðýnda en üst seviyede 2 kural var:
+1. veri tutarlýlýðý
+2. minimum tekrar
+
+SELECT Department, COUNT(*) FROM Employees GROUP BY Department HAVING COUNT(*) >
+5;
+Calisanlari departmanlara gore gruplar ve her departmanda en az 5 calisan olanlari listeler.
+
+balance tree -> sql in indeksleme mekanizmasý
