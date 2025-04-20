@@ -245,3 +245,13 @@ sayilar.Add(3); // Eklenmez, çünkü zaten var
 Doğrudan çalıştırılabilir dosyalar -> exe, com
 Her exe dosyasında mutlaka bir main metodu(entrypoint) bulunur. dll dosyalarında entrypoint 
 bulunmaz.
+
+C# .NET’te, eğer çalışma zamanında
+(runtime) atılan bir istisna (exception)
+yakalanamazsa aşağıdakilerden hangisi
+bu istisnayı yakalayacaktır?
+A)CLR ************
+B) Derleyici
+C) İşletim sistemi
+D)Linker
+E) Loader

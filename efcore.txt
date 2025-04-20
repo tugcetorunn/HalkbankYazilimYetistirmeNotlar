@@ -6,3 +6,5 @@ EF Core’da 'Global Query Filter' her sorguya varsayýlan filtre uygular.
 
 EF Core'da bir tablonun birden çok foreign key içermesi durumunda ModelBuilder ile fluent API 
 kullanýlarak iliþki tanýmlanmalý.
+
+var sonuc = context.Kitaplar.All(x => x.KitapId > 0); // tüm kitaplarýn id si 0 dan büyük mü

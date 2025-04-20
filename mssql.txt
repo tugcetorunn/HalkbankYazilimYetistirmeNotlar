@@ -1,39 +1,107 @@
-** inner join -> joinlenen ilişkili iki tabloya ait eşleşen veriler gelir.
--- Müşteri ve sipariş tablosu varsa, sadece siparişi olan müşteriler listelenir.
+ï»¿** inner join -> joinlenen iliÅŸkili iki tabloya ait eÅŸleÅŸen veriler gelir.
+-- MÃ¼ÅŸteri ve sipariÅŸ tablosu varsa, sadece sipariÅŸi olan mÃ¼ÅŸteriler listelenir.
 
-** left (left outer) join -> sol tablodaki tüm kayıtları getirir, sağ tabloda eşleşme 
-varsa getirir yoksa null döner.
--- Tüm müşteriler listelenir, siparişi olmayan müşterilerde sipariş alanları NULL olur.
+** left (left outer) join -> sol tablodaki tÃ¼m kayÄ±tlarÄ± getirir, saÄŸ tabloda eÅŸleÅŸme 
+varsa getirir yoksa null dÃ¶ner.
+-- TÃ¼m mÃ¼ÅŸteriler listelenir, sipariÅŸi olmayan mÃ¼ÅŸterilerde sipariÅŸ alanlarÄ± NULL olur.
 
-** right (right outer) join -> sağ tablodaki tüm kayıtları getirir. Sol tabloda eşleşme 
-varsa getirir, yoksa NULL döner.
+** right (right outer) join -> saÄŸ tablodaki tÃ¼m kayÄ±tlarÄ± getirir. Sol tabloda eÅŸleÅŸme 
+varsa getirir, yoksa NULL dÃ¶ner.
 
--- Tüm siparişler listelenir, müşteri bilgisi yoksa NULL döner.
-** full (full outer) join -> Her iki tablodaki tüm kayıtları getirir. Eşleşme varsa
-getirir, eşleşme yoksa NULL döner.
--- Müşterisi olmayan siparişler veya siparişi olmayan müşteriler de dahil olur.
+-- TÃ¼m sipariÅŸler listelenir, mÃ¼ÅŸteri bilgisi yoksa NULL dÃ¶ner.
+** full (full outer) join -> Her iki tablodaki tÃ¼m kayÄ±tlarÄ± getirir. EÅŸleÅŸme varsa
+getirir, eÅŸleÅŸme yoksa NULL dÃ¶ner.
+-- MÃ¼ÅŸterisi olmayan sipariÅŸler veya sipariÅŸi olmayan mÃ¼ÅŸteriler de dahil olur.
 
-** cross join -> İki tablo arasında kartezyen çarpım yapar. Her satır, diğer
-tablodaki tüm satırlarla eşleşir. SELECT * FROM Tablo1 CROSS JOIN Tablo2;
--- 3 müşteri, 4 ürün varsa, sonuç 3 × 4 = 12 satır olur.
+** cross join -> Ä°ki tablo arasÄ±nda kartezyen Ã§arpÄ±m yapar. Her satÄ±r, diÄŸer
+tablodaki tÃ¼m satÄ±rlarla eÅŸleÅŸir. SELECT * FROM Tablo1 CROSS JOIN Tablo2;
+-- 3 mÃ¼ÅŸteri, 4 Ã¼rÃ¼n varsa, sonuÃ§ 3 Ã— 4 = 12 satÄ±r olur.
+ProductID	ProductName	  Price
+1	          Laptop	  1500
+2	          Monitor	  800
+3	          Mouse	      150
+ShippingID	OptionName	   ShippingCost
+1	       Standart Kargo	   20
+2	       Ekspres Kargo	   50
+3	       Drone Teslim	       150
+MÃ¼ÅŸteriye, her Ã¼rÃ¼n iÃ§in her kargo tipinde olasÄ± toplam fiyat kombinasyonlarÄ±nÄ± gÃ¶stermek 
+istiyoruz.
+Her Ã¼rÃ¼n, her kargo tipiyle eÅŸleÅŸsin â†’ yani her olasÄ±lÄ±k listelensin. -> cross join
+SELECT 
+    p.ProductName,
+    s.OptionName,
+    p.Price,
+    s.ShippingCost,
+    (p.Price + s.ShippingCost) AS TotalPrice
+FROM Products p
+CROSS JOIN ShippingOptions s
+ORDER BY p.ProductName, s.ShippingCost;
+Neden cross join -> Ã‡Ã¼nkÃ¼ her Ã¼rÃ¼nÃ¼n, her kargo tipiyle her olasÄ± kombinasyonu gÃ¶rmek 
+istiyoruz. Bu, klasik bir kartezyen Ã§arpÄ±m Ã¶rneÄŸidir ve JOIN iliÅŸkisi gerekmez.
 
-** self join -> Bir tabloyu kendiyle joinlemek için kullanılır. Genelde hiyerarşik 
-yapılarda kullanılır (örneğin çalışan yöneticisi ilişkisi). SELECT A.Ad AS Calisan,
+** self join -> Bir tabloyu kendiyle joinlemek iÃ§in kullanÄ±lÄ±r. Genelde hiyerarÅŸik 
+yapÄ±larda kullanÄ±lÄ±r (Ã¶rneÄŸin Ã§alÄ±ÅŸan yÃ¶neticisi iliÅŸkisi). SELECT A.Ad AS Calisan,
 B.Ad AS Yonetici FROM Calisanlar A LEFT JOIN Calisanlar B ON A.YoneticiID = B.ID;
+Bir baÅŸka kullanÄ±m Ã¶rneÄŸi;
+-- aynÄ± kategorilerdeki Ã¼rÃ¼nleri getir
+select p1.ProductName, p2.ProductName from Products p1 join Products p2 on
+p1.CategoryID = p2.CategoryID 
 
-orphan records (öksüz yetim kayıt) -> inner join yazdığımızda karşısına değer 
-gelmiyorsa orphan olma ihtimali yüksektir ama kesin değildir. çünkü her kayıp orphan
-diyemeyiz. yeni bir departman açıldı. ama içerisine personel atanmadı. buna orphan 
-denilmez. 5 departman var 1 den 5 e kadar id lenmiş.
-fakat bir personelin departmanı 11. 11 id li departman yok. bu orphan dır. bunun önüne
-foreign key kısıtlaması ile geçeriz.
+-- union - iki veya daha fazla select sorgusunun sonuÃ§larÄ±nÄ± birleÅŸtirir. duplicate
+(tekrarlÄ±) olanlarÄ± gÃ¶stermez. birleÅŸen sorgu sonuÃ§larÄ±nÄ±n tipi, adedi aynÄ± olmalÄ±dÄ±r.
 
-veritabanı programcılığında en üst seviyede 2 kural var:
-1. veri tutarlılığı
+-- union all - yine iki veya daha fazla sorgu sonucunu birleÅŸtirir. ancak tekrarlÄ± veriyi 
+de gÃ¶sterir.
+
+-- except - birleÅŸen iki sonuÃ§tan ilk ile ikinciyi kÄ±yaslar ve ilkinde olup ikincisinde 
+olmayan sonuÃ§larÄ± dÃ¶ner.
+-- Ã¼rÃ¼nler tablosunda olup satÄ±ÅŸÄ± olmayan Ã¼rÃ¼nler
+select ProductID from Products 
+except 
+select ProductID from [Order Details]
+
+-- intersect - birleÅŸen iki sonucun kesiÅŸimini, ortak olan sonuÃ§larÄ±nÄ± verir.
+-- liste fiyatÄ±na satÄ±lan Ã¼rÃ¼nlerin adlarÄ± -- hangi Ã¼rÃ¼nlerde products iÃ§indeki unitprice 
+ile orderdetails iÃ§indeki unitprice eÅŸit
+select p.ProductID, p.UnitPrice from Products p group by ProductID, UnitPrice
+intersect
+select od.ProductID, od.UnitPrice from [Order Details] od group by ProductID, UnitPrice
+
+orphan records (Ã¶ksÃ¼z yetim kayÄ±t) -> inner join yazdÄ±ÄŸÄ±mÄ±zda karÅŸÄ±sÄ±na deÄŸer 
+gelmiyorsa orphan olma ihtimali yÃ¼ksektir ama kesin deÄŸildir. Ã§Ã¼nkÃ¼ her kayÄ±p orphan
+diyemeyiz. yeni bir departman aÃ§Ä±ldÄ±. ama iÃ§erisine personel atanmadÄ±. buna orphan 
+denilmez. 5 departman var 1 den 5 e kadar id lenmiÅŸ.
+fakat bir personelin departmanÄ± 11. 11 id li departman yok. bu orphan dÄ±r. bunun Ã¶nÃ¼ne
+foreign key kÄ±sÄ±tlamasÄ± ile geÃ§eriz.
+
+veritabanÄ± programcÄ±lÄ±ÄŸÄ±nda en Ã¼st seviyede 2 kural var:
+1. veri tutarlÄ±lÄ±ÄŸÄ±
 2. minimum tekrar
 
 SELECT Department, COUNT(*) FROM Employees GROUP BY Department HAVING COUNT(*) >
 5;
-Calisanlari departmanlara gore gruplar ve her departmanda en az 5 calisan olanlari listeler.
+Calisanlari departmanlara gore gruplar ve her departmanda en az 5 calisan olanlari 
+listeler.
 
-balance tree -> sql in indeksleme mekanizması
+balance tree -> sql in indeksleme mekanizmasÄ±
+
+kendi iÃ§erisinde bir hiyerarÅŸisi olan tablolar kendi kendine iliÅŸkilidir. -> 
+northwind employees tablosu. Ã§Ã¼nkÃ¼ iÃ§erisinde mÃ¼dÃ¼r olan Ã§alÄ±ÅŸanlar da var.
+self join kullanÄ±larak bu tablolarda hiyerarÅŸi sorgusu yazÄ±labilir.
+Ã–rnek - Her Ã§alÄ±ÅŸanÄ±n baÄŸlÄ± olduÄŸu yÃ¶neticiyi listelemek.
+SELECT 
+    e.EmployeeID AS CalisanID,
+    e.FirstName + ' ' + e.LastName AS CalisanAdi,
+    m.EmployeeID AS YoneticiID,
+    m.FirstName + ' ' + m.LastName AS YoneticiAdi
+FROM Employees e
+LEFT JOIN Employees m ON e.ReportsTo = m.EmployeeID
+ORDER BY e.EmployeeID;
+EmployeeID	LastName	FirstName	ReportsTo
+1	        Davolio	     Nancy	       NULL
+2	        Fuller	     Andrew	       1
+3	        Leverling	 Janet	       2
+4	        Peacock	    Margaret	   2
+ReportsTo â†’ bu Ã§alÄ±ÅŸanÄ±n hangi yÃ¶neticisine baÄŸlÄ± olduÄŸunu gÃ¶sterir (EmployeeID'ye 
+referans verir).
+Kendine baÄŸlanÄ±r, bu yÃ¼zden self join gerekir.
