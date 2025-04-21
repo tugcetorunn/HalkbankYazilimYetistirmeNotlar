@@ -105,3 +105,5 @@ EmployeeID	LastName	FirstName	ReportsTo
 ReportsTo → bu çalışanın hangi yöneticisine bağlı olduğunu gösterir (EmployeeID'ye 
 referans verir).
 Kendine bağlanır, bu yüzden self join gerekir.
+
+-- bir db açıkken kaydettiğimiz function ları bu db altında programmability -> sclara-valued func içinde görebiliriz.
