@@ -3,3 +3,18 @@ Dependency Injection (baðýmlýlýk enjeksiyonu) avantajý ->  Test edilebilirliði a
 async/await yapýsýnýn en önemli avantajý -> UI thread’i bloklamadan iþlemlerin yapýlmasýný saðlar.
 
 MVC Core’da middleware sýralamasý neden önemlidir -> Request pipeline sýrasýný belirler.
+
+*** controllerdan view e veri aktarma yöntemleri (5)
+- viewData
+- viewBag ***
+- tempData
+- model *************
+- viewModel *****
+
+*** view den controllera veri gönderme yöntemleri
+- requestForm 
+- queryString form get metodu ile ***
+- cookie, session (stateManagement - stateles konularý)
+- IFormCollection
+- Parametre
+- model ************
